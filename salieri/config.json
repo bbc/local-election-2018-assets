@@ -1,0 +1,8 @@
+{
+  "contents": [
+    {
+      "id": "my-component",
+      "endpoint": "http://172.29.13.90:8000/my-component.json"
+    }
+  ]
+}
