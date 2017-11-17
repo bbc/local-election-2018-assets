@@ -2,7 +2,7 @@
   "contents": [
     {
       "id": "my-component",
-      "endpoint": "http://172.29.13.90:8000/my-component.json"
+      "endpoint": "http://component:8080/my-component.json"
     }
   ]
 }
