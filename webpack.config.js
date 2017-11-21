@@ -1,30 +1,45 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const StaticComponentEnveloper = require('./webpack/static-component-enveloper');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ReplaceInFile = require('./webpack/replace-in-file-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: './js/main.js',
+    devtool: 'source-map',
     output: {
+        filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        publicPath: 'http://localhost:8080/'
+    },
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ],
+            })
+        }]
     },
     plugins: [
-        new StaticComponentEnveloper(),
-        new CopyWebpackPlugin([
-            {
-                from: 'css/**/*',
-            }
-        ]),
-        new ReplaceInFile([{
-            dir: 'dist',
-            test: [/.css$/i, /.json$/i, /.js$/i],
-            rules: [{
-                search: /{{STATIC_PREFIX}}/gi,
-                replace: 'http://localhost:8080'
-            }]
-        }])
+        new StaticComponentEnveloper({
+            includeJs: true
+        }),
+        new ExtractTextPlugin('style.css')
     ]
 }
-//http://localhost:8080

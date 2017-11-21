@@ -1,0 +1,12 @@
+$bg-color: #f50202;
+
+body {
+    .my-component {
+        background-color: $bg-color;
+        color: #FFF;
+    }
+
+    .new-component {
+        color: $bg-color;
+    }
+}

@@ -12,4 +12,4 @@ EXPOSE 8080
 
 WORKDIR /app
 
-CMD npm run dev
+CMD npm rebuild && npm run dev
