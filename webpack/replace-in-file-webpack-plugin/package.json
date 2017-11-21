@@ -1,0 +1,54 @@
+{
+  "_from": "replace-in-file-webpack-plugin",
+  "_id": "replace-in-file-webpack-plugin@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-6wrgiVhWwSnbex0nwLzxzxUevmtzY226tTnp4pMKaXaH2/WYeR/l91UkfHroHiUQ9CbP5cwzhNxbnrL2c74uCQ==",
+  "_location": "/replace-in-file-webpack-plugin",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "replace-in-file-webpack-plugin",
+    "name": "replace-in-file-webpack-plugin",
+    "escapedName": "replace-in-file-webpack-plugin",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/replace-in-file-webpack-plugin/-/replace-in-file-webpack-plugin-1.0.0.tgz",
+  "_shasum": "b34275e5d9c9beb97f5300fd7d72e4d9099f7979",
+  "_spec": "replace-in-file-webpack-plugin",
+  "_where": "/Users/fewsta03/Development/static-components",
+  "author": {
+    "name": "Walt Ouyang",
+    "email": "oyslin@163.com"
+  },
+  "bugs": {
+    "url": "https://github.com/oyslin/replace-in-file-webpack-plugin/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A webpack plugin to replace strings in file(s) after building",
+  "homepage": "https://github.com/oyslin/replace-in-file-webpack-plugin#readme",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "replace",
+    "file"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "replace-in-file-webpack-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyslin/replace-in-file-webpack-plugin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

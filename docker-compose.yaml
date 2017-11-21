@@ -1,14 +1,16 @@
-salieri:
-  restart: always
-  build: ./docker/salieri
-  volumes:
-    - "./:/app"
-  ports:
-    - "3000:3000"
-component:
-  restart: always
-  build: ./docker/component
-  volumes:
-    - "./:/app"
-  ports:
-    - "8080:8080"
+version: "3"
+services:
+  salieri:
+    restart: always
+    build: ./docker/salieri
+    volumes:
+      - "./:/app"
+    ports:
+      - "3000:3000"
+  component:
+    restart: always
+    build: ./docker/component
+    volumes:
+      - "./:/app"
+    ports:
+      - "8080:8080"

@@ -17,6 +17,7 @@ const VALID_COMPONENT_SECTIONS = {
 };
 
 class StaticComponentEnveloper {
+
     apply(compiler) {
         compiler.plugin('emit', async (compilation, callback) => {
             const srcDir = compiler.options.context;
