@@ -2,7 +2,6 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const StaticComponentEnveloper = require('./webpack/static-component-enveloper');
-const ReplaceInFile = require('./webpack/replace-in-file-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -11,7 +10,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/'
+        publicPath: 'http://localhost:8080/',
     },
     module: {
         rules: [{
@@ -33,13 +32,17 @@ module.exports = {
                         }
                     }
                 ],
-            })
-        }]
+            }),
+        }],
     },
     plugins: [
         new StaticComponentEnveloper({
-            includeJs: true
+            test: /\.html$/, // Which files should be turned into components)
+            // How to turn a file matched with test into a component name. (accepts a Function or String)
+            componentName: fileName => fileName.match(/(.*)\.html$/)[1],
+            includeJs: true, // Should the JS bundle be included.
+            hash: true, // Include a unique hash per build to cachebust assets
         }),
-        new ExtractTextPlugin('style.css')
-    ]
+        new ExtractTextPlugin('style.css'),
+    ],
 }

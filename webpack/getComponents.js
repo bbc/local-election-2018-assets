@@ -1,44 +1,44 @@
 const fs = require('fs');
 
-const VALID_COMPONENT_SECTIONS = ['--head.html', '--body.html', '--body-last.html'];
-
-const isFileComponentSection = (file) => {
-    for (let i = 0; i < VALID_COMPONENT_SECTIONS.length; i++) {
-        const componentSection = VALID_COMPONENT_SECTIONS[i];
-        if (file.endsWith(componentSection)) {
-            return true;
-        }
-    }
-    return false;
-};
-
-const getComponentNameFromFile = (file) => {
-    for (let i = 0; i < VALID_COMPONENT_SECTIONS.length; i++) {
-        const componentSection = VALID_COMPONENT_SECTIONS[i];
-        if (file.endsWith(componentSection)) {
-            return file.slice(0, -componentSection.length);
-        }
-    }
-};
-
-const onlyUnique = (value, index, self) => {
-    return self.indexOf(value) === index;
-};
-
-const getComponentSectionFiles = async ({directory}) => {
+const getFilesInDirectory = async ({directory}) => {
     return new Promise((resolve) => {
         fs.readdir(directory, (err, files) => {
-            resolve(files.filter(isFileComponentSection));
+            resolve(files);
         });
     });
-}
-
-const getComponents = async ({directory}) => {
-    const compoentSectionFiles = await getComponentSectionFiles({directory});
-    return compoentSectionFiles
-        .map(getComponentNameFromFile)
-        .filter(onlyUnique);
 };
 
-module.exports.getComponents = getComponents;
-module.exports.getComponentSectionFiles = getComponentSectionFiles;
+const getComponentName = ({componentName, componentFile}) => {
+    if (typeof componentName === 'string') {
+        return componentName;
+    }
+    else if (typeof componentName === 'function') {
+        const name = componentName(componentFile);
+        if (typeof name === 'string') {
+            return name;
+        }
+        throw new Error ('Component name function must return a string.');
+    }
+    throw new Error ('Component name must be a string or function.');
+};
+
+
+const getComponents = async ({directory, test, componentName}) => {
+    const filesInSrcDirectory = await getFilesInDirectory({directory});
+
+    const matchedComponentFiles = filesInSrcDirectory.filter((file) => {
+        return test.test(file);
+    });
+
+    const components = matchedComponentFiles.map((componentFile) => {
+        const name = getComponentName({componentName, componentFile});
+        return {
+            name: name,
+            file: componentFile
+        }
+    });
+
+    return components;
+};
+
+module.exports = getComponents;
