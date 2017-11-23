@@ -1,12 +1,18 @@
-$bg-color: #f50202;
+@import '~gel-sass-tools/sass-tools';
+@import '~sass-mq/mq';
+@import '~gel-typography/typography';
 
-body {
-    .my-component {
-        background-color: $bg-color;
-        color: #FFF;
-    }
 
-    .new-component {
-        color: $bg-color;
-    }
+@import 'vars.scss';
+
+.my-component {
+    @include gel-typography('pica');
+
+    padding: 2em;
+    background-color: $bg-color;
+    color: #FFF;
+}
+
+.new-component {
+    color: $bg-color;
 }
