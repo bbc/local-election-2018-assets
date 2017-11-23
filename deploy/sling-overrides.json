@@ -1,0 +1,12 @@
+[
+    {
+        "regex": "(\\.html|\\.htm|\\.inc)$",
+        "CachePolicy": "max-age=60",
+        "ContentType": "text/html"
+    },
+    {
+        "regex": "\\.json$",
+        "CachePolicy": "max-age=60",
+        "ContentType": "application/json"
+    }
+]
