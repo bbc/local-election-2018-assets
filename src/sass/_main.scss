@@ -1,0 +1,11 @@
+@if $core {
+    body {
+        background-color: blue;
+    }
+}
+
+@if $enhanced {
+    body {
+        background-color: red;
+    }
+}

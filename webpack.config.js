@@ -5,7 +5,13 @@ const StaticComponentEnveloper = require('./webpack/static-component-enveloper')
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    entry: './js/main.js',
+    entry: {
+        main: [
+            './js/main.js',
+            './sass/core.scss',
+            './sass/enhanced.scss'
+        ],
+    },
     devtool: 'source-map',
     output: {
         filename: 'js/[name].js',
@@ -14,7 +20,7 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.scss$/,
+            test: /.scss$/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: [
@@ -31,18 +37,20 @@ module.exports = {
                             sourceMap: true
                         }
                     }
-                ],
+                ]
             }),
-        }],
+        }]
     },
     plugins: [
         new StaticComponentEnveloper({
             test: /\.html$/, // Which files should be turned into components)
             // How to turn a file matched with test into a component name. (accepts a Function or String)
             componentName: fileName => fileName.match(/(.*)\.html$/)[1],
-            includeJs: true, // Should the JS bundle be included.
+            includeJs: true, // Should the JS bundle be included automatically.
+            includeCss: false, // Should the CSS bundles be included automatically.
             hash: true, // Include a unique hash per build to cachebust assets
+            injectHead: path.resolve(__dirname, 'src/enhanced-css.inc') // A template to inject in the head
         }),
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin({filename: '[name].css'})
     ],
 }
