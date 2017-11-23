@@ -1,6 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const deployPaths = require('./deploy/deploy-paths');
 const StaticComponentEnveloper = require('./webpack/static-component-enveloper');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/',
+        publicPath: deployPaths.getPublicPath(),
     },
     module: {
         rules: [{
@@ -43,6 +43,6 @@ module.exports = {
             includeJs: true, // Should the JS bundle be included.
             hash: true, // Include a unique hash per build to cachebust assets
         }),
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('style.css')
     ],
 }
