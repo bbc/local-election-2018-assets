@@ -1,3 +1,9 @@
+@import '~gel-sass-tools/sass-tools';
+@import '~sass-mq/mq';
+@import '~gel-typography/typography';
+
+@import 'vars.scss';
+
 @if $core {
     body {
         background-color: blue;
@@ -8,4 +14,17 @@
     body {
         background-color: red;
     }
+}
+
+
+.my-component {
+    @include gel-typography('pica');
+
+    padding: 2em;
+    background-color: $bg-color;
+    color: #FFF;
+}
+
+.new-component {
+    color: $bg-color;
 }
