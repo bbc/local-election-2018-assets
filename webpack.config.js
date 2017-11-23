@@ -56,7 +56,8 @@ module.exports = {
             includeJs: true, // Should the JS bundle be included automatically.
             includeCss: false, // Should the CSS bundles be included automatically.
             hash: true, // Include a unique hash per build to cachebust assets
-            injectHead: path.resolve(__dirname, 'src/enhanced-css.inc') // A template to inject in the head
+            injectHead: path.resolve(__dirname, 'src/enhanced-css.inc'), // A template to inject in the head
+            minify: true, // Should we minfify the HTML output
         }),
         extractCoreCss,
         extractEnhancedCss

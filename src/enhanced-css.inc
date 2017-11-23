@@ -1,4 +1,4 @@
-<!-- This will come from another component in the future --!>
+<!-- This will come from another component in the future -->
 <script type="text/javascript">
 if (typeof window.DataPres === "undefined") {
     var modernBrowser = ('addEventListener' in window && 'querySelector' in document && 'localStorage' in window),
@@ -6,7 +6,7 @@ if (typeof window.DataPres === "undefined") {
     window.DataPres = { enhanced: modernBrowser && !isOperaMini };
 }
 </script>
-<!-- END --!>
+<!-- END -->
 
 <link rel="preload" as="style" href="<%= publicPath %>enhanced.css" media="all">
 <noscript><link rel="stylesheet" href="<%= publicPath %>core.css" media="all"></script></noscript>
