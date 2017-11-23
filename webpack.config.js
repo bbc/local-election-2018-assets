@@ -3,15 +3,33 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const deployPaths = require('./deploy/deploy-paths');
 const StaticComponentEnveloper = require('./webpack/static-component-enveloper');
 
+const extractCoreCss = new ExtractTextPlugin('core.css');
+const extractEnhancedCss = new ExtractTextPlugin('enhanced.css');
+
+const sassExtractOptions = {
+    fallback: 'style-loader',
+    use: [
+        {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true,
+                minimize: true
+            }
+        },
+        {
+            loader: 'sass-loader',
+            options: {
+                sourceMap: true
+            }
+        }
+    ]
+};
+
+
+
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    entry: {
-        main: [
-            './js/main.js',
-            './sass/core.scss',
-            './sass/enhanced.scss'
-        ],
-    },
+    entry: './js/main.js',
     devtool: 'source-map',
     output: {
         filename: 'js/[name].js',
@@ -19,27 +37,16 @@ module.exports = {
         publicPath: deployPaths.getPublicPath(),
     },
     module: {
-        rules: [{
-            test: /.scss$/,
-            use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
-                ]
-            }),
-        }]
+        rules: [
+            {
+                test: /core\.scss$/,
+                use: extractCoreCss.extract(sassExtractOptions),
+            },
+            {
+                test: /enhanced\.scss$/,
+                use: extractEnhancedCss.extract(sassExtractOptions),
+            }
+        ],
     },
     plugins: [
         new StaticComponentEnveloper({
@@ -51,6 +58,7 @@ module.exports = {
             hash: true, // Include a unique hash per build to cachebust assets
             injectHead: path.resolve(__dirname, 'src/enhanced-css.inc') // A template to inject in the head
         }),
-        new ExtractTextPlugin({filename: '[name].css'})
+        extractCoreCss,
+        extractEnhancedCss
     ],
 }
