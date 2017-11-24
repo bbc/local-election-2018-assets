@@ -1,4 +1,3 @@
-const includedDep = require('./include');
+import includedDep from './include'
 
-console.log('Hello, World!');
 includedDep();
