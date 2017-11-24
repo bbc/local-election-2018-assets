@@ -17,7 +17,7 @@ class StaticComponentEnveloper {
         }
         // Turn on minification by default
         if (typeof options.minify === 'undefined') {
-            options.includeJs = true;
+            options.minify = true;
         }
 
         this.options = options;
@@ -85,7 +85,8 @@ class StaticComponentEnveloper {
     // Currently all CSS files are placed in the head.
     async getComponentHead({assets, compilation}) {
         const headElements = [];
-        // If we want to exclue CSS return a blank array.
+
+        // If we want to include CSS files add them to the head.
         if (this.options.includeCss === true) {
             assets.css.forEach((cssFile) => {
                 headElements.push(`<link href="${cssFile}" rel="stylesheet"/>`);
