@@ -1,5 +1,5 @@
 import assert from 'assert'
-import includedDep from '../js/include';
+import includedDep from '../src/js/include';
 
 describe('include', function(){
     it('should return the string `test`', () => {

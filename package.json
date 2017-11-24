@@ -12,9 +12,9 @@
     "deploy:live": "export SLING_ENV=live && npm run build:prod && node ./deploy/deploy.js",
     "deploy:test:overwrite": "export SLING_ENV=test && npm run build:prod && node ./deploy/deploy.js -o",
     "deploy:live:overwrite": "export SLING_ENV=live && npm run build:prod && node ./deploy/deploy.js -o",
-    "test": "mocha-webpack \"src/spec/*.js\"",
+    "test": "mocha-webpack --recursive \"spec/**/*.js\"",
     "test:cli": "mocha-webpack",
-    "test:watch": "mocha-webpack --watch \"src/spec/*.js\""
+    "test:watch": "mocha-webpack --watch spec"
   },
   "repository": {
     "type": "git",
