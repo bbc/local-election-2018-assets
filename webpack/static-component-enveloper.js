@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
+const minify = require('html-minifier').minify;
 const getComponents = require('./getComponents');
 
 class StaticComponentEnveloper {
@@ -12,7 +13,11 @@ class StaticComponentEnveloper {
         }
         // Turn on CSS including by default
         if (typeof options.includeCss === 'undefined') {
-            options.includeJs = true;
+            options.includeCss = true;
+        }
+        // Turn on minification by default
+        if (typeof options.minify === 'undefined') {
+            options.minify = true;
         }
 
         this.options = options;
@@ -80,23 +85,30 @@ class StaticComponentEnveloper {
     // Currently all CSS files are placed in the head.
     async getComponentHead({assets, compilation}) {
         const headElements = [];
-        // If we want to exclue CSS return a blank array.
+
+        // If we want to include CSS files add them to the head.
         if (this.options.includeCss === true) {
             assets.css.forEach((cssFile) => {
                 headElements.push(`<link href="${cssFile}" rel="stylesheet"/>`);
             });
         }
 
-        if (typeof this.options.injectHead !== undefined) {
+        if (typeof this.options.injectHead !== 'undefined') {
             const injectedHead = await this.compileInjectedTemplate({
                 compilation,
                 templatePath: this.options.injectHead
             });
 
-            headElements.push(injectedHead);
+            headElements.push(this.minifyHtmlIfEnabled(injectedHead));
         }
 
         return headElements;
+    }
+
+    async getComponentBody({component, srcDir}) {
+        const componentBodyPath = path.resolve(srcDir, component.file);
+        const componentHtml = await this.readFile(componentBodyPath);
+        return this.minifyHtmlIfEnabled(componentHtml);
     }
 
     // Currently all JS files are placed in the bodyLast section.
@@ -132,9 +144,20 @@ class StaticComponentEnveloper {
         });
     }
 
-    async getComponentBody({component, srcDir}) {
-        const componentBodyPath = path.resolve(srcDir, component.file);
-        return await this.readFile(componentBodyPath);
+    minifyHtmlIfEnabled(html) {
+        // If minifcation is disabled just return the html
+        if (!this.options.minify) {
+            return html;
+        }
+
+        const minifyOptions = {
+            minifyCSS: true,
+            minifyJS: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            removeComments: true,
+        };
+        return minify(html, minifyOptions);
     }
 
     /*
@@ -226,7 +249,7 @@ class StaticComponentEnveloper {
 
         // Duplicate css assets can occur on occasion if more than one chunk
         // requires the same css.
-        assets.css = assets.css.filter(this.onlyUnique);
+        assets.css = _.uniq(assets.css);
 
         return assets;
     }
@@ -237,11 +260,6 @@ class StaticComponentEnveloper {
         }
         return url + (url.indexOf('?') === -1 ? '?' : '&') + hash;
     }
-
-    onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
 }
 
 module.exports = StaticComponentEnveloper;

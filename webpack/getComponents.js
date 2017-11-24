@@ -22,7 +22,6 @@ const getComponentName = ({componentName, componentFile}) => {
     throw new Error ('Component name must be a string or function.');
 };
 
-
 const getComponents = async ({directory, test, componentName}) => {
     const filesInSrcDirectory = await getFilesInDirectory({directory});
 
