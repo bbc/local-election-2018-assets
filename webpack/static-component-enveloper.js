@@ -1,12 +1,17 @@
 const path = require('path');
 const fs = require('fs');
+const _ = require('lodash');
 const getComponents = require('./getComponents');
 
 class StaticComponentEnveloper {
 
     constructor(options) {
-        // Turn on JS by default
+        // Turn on JS including by default
         if (typeof options.includeJs === 'undefined') {
+            options.includeJs = true;
+        }
+        // Turn on CSS including by default
+        if (typeof options.includeCss === 'undefined') {
             options.includeJs = true;
         }
 
@@ -55,7 +60,7 @@ class StaticComponentEnveloper {
         const assets = this.getAssets({compilation, chunks});
 
         const componentEnvelope = {
-            head: this.getComponentHead({assets}),
+            head: await this.getComponentHead({assets, compilation}),
             bodyInline: await this.getComponentBody({srcDir, component}),
             bodyLast: this.getComponentBodyLast({assets})
         };
@@ -73,10 +78,25 @@ class StaticComponentEnveloper {
     }
 
     // Currently all CSS files are placed in the head.
-    getComponentHead({assets}) {
-        return assets.css.map((cssFile) => {
-            return `<link href="${cssFile}" rel="stylesheet"/>`;
-        });
+    async getComponentHead({assets, compilation}) {
+        const headElements = [];
+        // If we want to exclue CSS return a blank array.
+        if (this.options.includeCss === true) {
+            assets.css.forEach((cssFile) => {
+                headElements.push(`<link href="${cssFile}" rel="stylesheet"/>`);
+            });
+        }
+
+        if (typeof this.options.injectHead !== undefined) {
+            const injectedHead = await this.compileInjectedTemplate({
+                compilation,
+                templatePath: this.options.injectHead
+            });
+
+            headElements.push(injectedHead);
+        }
+
+        return headElements;
     }
 
     // Currently all JS files are placed in the bodyLast section.
@@ -91,18 +111,30 @@ class StaticComponentEnveloper {
         });
     }
 
-    async getComponentBody({component, srcDir}) {
+    async compileInjectedTemplate({templatePath, compilation}) {
+        const templateContents = await this.readFile(templatePath);
+        const templateValues = {
+            publicPath: this.getPublicPath({compilation})
+        };
+        return _.template(templateContents)(templateValues);
+    }
+
+    async readFile(file) {
         return new Promise((resolve, reject) => {
-            const sectionPath = path.resolve(srcDir, component.file);
-            fs.readFile(sectionPath, 'utf-8', (err, html) => {
+            fs.readFile(file, 'utf-8', (err, contents) => {
                 if (err) {
-                    reject('Error reading component file.');
+                    reject(`Error reading file ${file}`);
                 }
                 else {
-                    resolve(html);
+                    resolve(contents);
                 }
             });
         });
+    }
+
+    async getComponentBody({component, srcDir}) {
+        const componentBodyPath = path.resolve(srcDir, component.file);
+        return await this.readFile(componentBodyPath);
     }
 
     /*

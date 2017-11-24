@@ -2,8 +2,20 @@
 @import '~sass-mq/mq';
 @import '~gel-typography/typography';
 
-
 @import 'vars.scss';
+
+@if $core {
+    body {
+        background-color: blue;
+    }
+}
+
+@if $enhanced {
+    body {
+        background-color: red;
+    }
+}
+
 
 .my-component {
     @include gel-typography('pica');

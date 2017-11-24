@@ -1,7 +1,8 @@
+// You probably don't need to edit this file.
+
 // This is required to include styles in the page
-require('../sass/styles.scss');
+require('../sass/core.scss');
+require('../sass/enhanced.scss');
 
-const includedDep = require('./include');
-
-console.log('Hello, World!');
-includedDep();
+// Include the JS
+require('./component.js');
