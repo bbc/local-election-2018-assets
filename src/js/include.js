@@ -13,4 +13,5 @@ module.exports = () => {
     console.log('We can import JS');
     const es6Object = new ES6ClassInclude();
     es6Object.do();
+    return 'test';
 };
