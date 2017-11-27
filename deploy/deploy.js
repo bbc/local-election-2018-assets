@@ -24,6 +24,7 @@ class StaticComponentDeployment {
         }
         catch (error) {
             console.error(colors.white.bgRed(`\n\n${error}\n`));
+            process.exit(1);
         }
 
     }
