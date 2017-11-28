@@ -1,10 +1,9 @@
 const path = require('path');
-const colors = require('colors');
+const chalk = require('chalk');
 const Sling = require('@bbc/sling');
 const deployPaths = require('./deploy-paths');
 
 const overrides = require('./sling-overrides.json');
-
 
 class StaticComponentDeployment {
     constructor(options) {
@@ -20,10 +19,10 @@ class StaticComponentDeployment {
         try {
             await this.checkVersionDoesntAlreadyExist(sling);
             await this.deployToSling(sling);
-            console.info(colors.white.bgGreen(`\n\nSuccessfully deployed to Sling!\n${deployPaths.getSlingPublicPath()}\n`));
+            console.info(chalk.white.bgGreen.bold(`\n\nSuccessfully deployed to Sling!\n${deployPaths.getSlingPublicPath()}\n`));
         }
         catch (error) {
-            console.error(colors.white.bgRed(`\n\n${error}\n`));
+            console.error(chalk.white.bgRed.bold(`\n\n${error}\n`));
             process.exit(1);
         }
 
