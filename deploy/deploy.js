@@ -29,10 +29,7 @@ class StaticComponentDeployment {
     }
 
     doesOverwriteFlagExist() {
-        return process.argv.some((flag) => {
-            const overwriteFlags = ['-o', '--overwrite'];
-            return overwriteFlags.includes(flag);
-        });
+        return process.env.SLING_OVERWRITE === '1';
     }
 
     async checkVersionDoesntAlreadyExist(sling) {
