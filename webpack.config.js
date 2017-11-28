@@ -1,7 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const deployPaths = require('./deploy/deploy-paths');
-const StaticComponentEnveloper = require('./webpack/static-component-enveloper');
+const StaticComponentEnveloper = require('@bbc/webpack-static-component-enveloper-plugin');
 
 const extractCoreCss = new ExtractTextPlugin('core.css');
 const extractEnhancedCss = new ExtractTextPlugin('enhanced.css');
