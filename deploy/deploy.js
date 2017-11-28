@@ -19,10 +19,10 @@ class StaticComponentDeployment {
         try {
             await this.checkVersionDoesntAlreadyExist(sling);
             await this.deployToSling(sling);
-            console.info(chalk.white.bgGreen.bold(`\n\nSuccessfully deployed to Sling!\n${deployPaths.getSlingPublicPath()}\n`));
+            console.info(chalk.green.bold(`\n\nSuccessfully deployed to Sling!\n${deployPaths.getSlingPublicPath()}\n`));
         }
         catch (error) {
-            console.error(chalk.white.bgRed.bold(`\n\n${error}\n`));
+            console.error(chalk.red.bold(`\n\n${error}\n`));
             process.exit(1);
         }
 
