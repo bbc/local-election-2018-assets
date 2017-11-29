@@ -1,13 +1,3 @@
-<!-- This will come from another component in the future -->
-<script type="text/javascript">
-if (typeof window.DataPres === "undefined") {
-    var modernBrowser = ('addEventListener' in window && 'querySelector' in document && 'localStorage' in window),
-        isOperaMini = (window.navigator.userAgent.indexOf('Opera Mini/') > -1 && window.navigator.userAgent.indexOf('Presto/') > -1);
-    window.DataPres = { enhanced: modernBrowser && !isOperaMini };
-}
-</script>
-<!-- END -->
-
 <link rel="preload" as="style" href="<%= publicPath %>enhanced.css" media="all">
 <noscript><link rel="stylesheet" href="<%= publicPath %>core.css" media="all"></script></noscript>
 <script type="text/javascript">
@@ -21,6 +11,10 @@ if (typeof window.DataPres === "undefined") {
         link.href = cssPath;
         head.appendChild(link);
     }
-    loadCssFile(window.DataPres.enhanced ? '<%= publicPath %>enhanced.css' : '<%= publicPath %>core.css');
+    // Check that window.DataPres.enhanced actually exists.
+    var datapresEnhancedDefined = (typeof window.DataPres !== 'undefined' && typeof window.DataPres.enhanced !== 'undefined');
+    // If window.DataPres.enhanced is not found default to enhanced styles. Otherwise go off it's value.
+    var shouldBeEnhanced = !datapresEnhancedDefined || window.DataPres.enhanced;
+    loadCssFile(shouldBeEnhanced ? '<%= publicPath %>enhanced.css' : '<%= publicPath %>core.css');
 }());
 </script>
