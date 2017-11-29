@@ -12,27 +12,6 @@ const getPublicPath = () => {
     return 'http://localhost:8080/';
 }
 
-const extractCoreCss = new ExtractTextPlugin('core.css');
-const extractEnhancedCss = new ExtractTextPlugin('enhanced.css');
-const sassExtractOptions = {
-    fallback: 'style-loader',
-    use: [
-        {
-            loader: 'css-loader',
-            options: {
-                sourceMap: true,
-                minimize: true
-            }
-        },
-        {
-            loader: 'sass-loader',
-            options: {
-                sourceMap: true
-            }
-        }
-    ]
-};
-
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: './js/main.js',
@@ -55,12 +34,25 @@ module.exports = {
                 }
             },
             {
-                test: /core\.scss$/,
-                use: extractCoreCss.extract(sassExtractOptions),
-            },
-            {
-                test: /enhanced\.scss$/,
-                use: extractEnhancedCss.extract(sassExtractOptions),
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                minimize: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ],
+                }),
             }
         ],
     },
@@ -70,12 +62,11 @@ module.exports = {
             // How to turn a file matched with test into a component name. (accepts a Function or String)
             componentName: fileName => fileName.match(/(.*)\.html$/)[1],
             includeJs: true, // Should the JS bundle be included automatically.
-            includeCss: false, // Should the CSS bundles be included automatically.
+            includeCss: true, // Should the CSS bundles be included automatically.
             hash: true, // Include a unique hash per build to cachebust assets
-            injectHead: path.resolve(__dirname, 'src/enhanced-css.inc'), // A template to inject in the head
+            injectHead: undefined, // A template to inject in the head
             minify: true, // Should we minfify the HTML output
         }),
-        extractCoreCss,
-        extractEnhancedCss
+        new ExtractTextPlugin('style.css')
     ],
 }

@@ -1,0 +1,12 @@
+@import 'vars.scss';
+
+
+.my-component {
+    padding: 2em;
+    background-color: $blue-color;
+    color: #FFF;
+}
+
+.new-component {
+    color: $blue-color;
+}
