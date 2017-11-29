@@ -12,6 +12,7 @@
     "deploy:live": "cross-env-shell SLING_ENV=live \"npm run build:prod && static-component-deployer\"",
     "deploy:test:overwrite": "cross-env SLING_OVERWRITE=1 npm run deploy:test",
     "deploy:live:overwrite": "cross-env SLING_OVERWRITE=1 npm run deploy:live",
+    "rebuild-if-needed": "npm-idempotent-rebuild",
     "test": "mocha-webpack \"spec/**/*.js\"",
     "test:cli": "mocha-webpack",
     "test:watch": "mocha-webpack --watch spec"
@@ -33,7 +34,9 @@
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "node-sass": "^4.7.2",
+    "npm-idempotent-rebuild": "^1.0.2",
     "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.5"
   },
