@@ -1,11 +1,19 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const deployPaths = require('./deploy/deploy-paths');
 const StaticComponentEnveloper = require('@bbc/webpack-static-component-enveloper-plugin');
+
+const getPublicPath = () => {
+    const slingEnv = process.env.SLING_ENV;
+    const nodeEnv = process.env.NODE_ENV;
+    if (nodeEnv === 'production' && typeof slingEnv !== 'undefined') {
+        const staticComponentDeployer = require('@bbc/static-component-deployer');
+        return staticComponentDeployer.getSlingPublicPath(slingEnv);
+    }
+    return 'http://localhost:8080/';
+}
 
 const extractCoreCss = new ExtractTextPlugin('core.css');
 const extractEnhancedCss = new ExtractTextPlugin('enhanced.css');
-
 const sassExtractOptions = {
     fallback: 'style-loader',
     use: [
@@ -25,8 +33,6 @@ const sassExtractOptions = {
     ]
 };
 
-
-
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: './js/main.js',
@@ -34,7 +40,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: deployPaths.getPublicPath(),
+        publicPath: getPublicPath(),
     },
     module: {
         rules: [

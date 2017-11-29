@@ -8,8 +8,8 @@
     "build:prod": "cross-env NODE_ENV=production webpack -p",
     "dev": "webpack-dev-server --content-base dist --disable-host-check --public --host 0.0.0.0",
     "debug": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js --verbose",
-    "deploy:test": "cross-env-shell SLING_ENV=test \"npm run build:prod && node ./deploy/deploy.js\"",
-    "deploy:live": "cross-env-shell SLING_ENV=live \"npm run build:prod && node ./deploy/deploy.js\"",
+    "deploy:test": "cross-env-shell SLING_ENV=test \"npm run build:prod && static-component-deployer\"",
+    "deploy:live": "cross-env-shell SLING_ENV=live \"npm run build:prod && static-component-deployer\"",
     "deploy:test:overwrite": "cross-env SLING_OVERWRITE=1 npm run deploy:test",
     "deploy:live:overwrite": "cross-env SLING_OVERWRITE=1 npm run deploy:live",
     "test": "mocha-webpack \"spec/**/*.js\"",
@@ -21,24 +21,21 @@
     "url": "git+https://github.com/bbc/static-components.git"
   },
   "devDependencies": {
-    "@bbc/sling": "^1.4.4",
-    "@bbc/webpack-static-component-enveloper-plugin": "^1.0.2",
+    "@bbc/static-component-deployer": "^1.0.0",
+    "@bbc/webpack-static-component-enveloper-plugin": "^1.0.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "copy-webpack-plugin": "^4.2.1",
+    "copy-webpack-plugin": "^4.2.3",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "node-sass": "^4.7.2",
-    "replace-in-file-webpack-plugin": "^1.0.0",
     "sass-loader": "^6.0.6",
-    "string-replace-webpack-plugin": "^0.1.3",
-    "uglifyjs-webpack-plugin": "^1.1.0",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
     "gel-typography": "^2.0.5"
