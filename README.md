@@ -50,7 +50,7 @@ The tests are found in the `spec/` directory. You should add new tests for your 
 npm test
 ```
 
-You can run the tests in watch mode, they will get ran automatically each time you save.
+You can run the tests in watch mode; they will get run automatically each time you save.
 
 ```
 npm run test:watch
