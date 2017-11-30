@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@bbc/static-component-deployer": "^1.0.0",
-    "@bbc/webpack-static-component-enveloper-plugin": "^1.0.6",
+    "@bbc/webpack-static-component-enveloper-plugin": "^1.0.7",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -37,7 +37,7 @@
     "npm-idempotent-rebuild": "^1.0.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
+    "webpack": "^3.9.0",
     "webpack-dev-server": "^2.9.5"
   }
 }
