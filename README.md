@@ -7,7 +7,7 @@ This repo should be used as a starting point for your static component. You shou
 **Replace my-component in the below commands with the name of your component**
 
 ```
-git clone --origin valilla https://github.com/bbc/vanilla-static-component.git my-component
+git clone --origin vanilla https://github.com/bbc/vanilla-static-component.git my-component
 cd vanilla-static-component
 git remote add origin https://github.com/bbc/my-component.git
 git push -u origin master
