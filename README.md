@@ -25,7 +25,14 @@ Next we need to install the node dependencies.
 npm install
 ```
 
-We're almost done. To check everything is working start the dev server.
+If you've an .env file within a repo cloned from this one, you will have to update it with the paths to your sandbox certificate and cloud-ca certificate, as otherwise the following command will likely fail.
+
+```
+CERT_PATH=/Users/USERNAME/FILE_PATH/certificate.pem
+CA_PATH=/Users/USERNAME/FILE_PATH/cloud-ca.pem
+```
+
+To check everything is working start the dev server.
 
 ```
 docker-compose up --build
