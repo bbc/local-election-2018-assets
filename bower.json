@@ -1,0 +1,21 @@
+{
+  "name": "vanilla-static-component",
+  "description": "Using bower components with (grandstand) with webpack",
+  "main": "main.js",
+  "authors": [
+    "BBC News Data Presentation Gangstas"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bbc/vanilla-static-component",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gs-sass-tools": "^4.1.9"
+  }
+}

@@ -1,4 +1,5 @@
 @import 'vars.scss';
+@import "../../bower_components/gs-sass-tools/_sass-tools";
 
 
 .my-component {
@@ -9,4 +10,8 @@
 
 .new-component {
     color: $blue-color;
+}
+
+.boo-bower {
+	display: none;
 }

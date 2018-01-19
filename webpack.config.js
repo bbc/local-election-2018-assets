@@ -13,6 +13,9 @@ const getPublicPath = () => {
 }
 
 module.exports = {
+    resolve : {
+        modules: [path.resolve(__dirname, "vendor/bower"), "node_modules"]
+    },
     context: path.resolve(__dirname, 'src'),
     entry: './js/main.js',
     devtool: 'source-map',

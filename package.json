@@ -15,7 +15,8 @@
     "rebuild-if-needed": "npm-idempotent-rebuild",
     "test": "mocha-webpack \"spec/**/*.js\"",
     "test:cli": "mocha-webpack",
-    "test:watch": "mocha-webpack --watch spec"
+    "test:watch": "mocha-webpack --watch spec",
+    "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
