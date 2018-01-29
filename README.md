@@ -2,6 +2,8 @@
 > A starting point for a static component which is deployed using [sling scanner](https://github.com/bbc/sling-scanner).
 
 ## Getting started
+Make sure you're a member of the @bbc org on NPM (https://www.npmjs.com/org/bbc); contact Christopher Ashton to get added.
+
 This repo should be used as a starting point for your static component. You should start by cloning it and adding this repo as a named remote (`vanilla`), this will allow you to pull updates from this repo in the future.
 
 **Replace my-component in the below commands with the name of your component**
