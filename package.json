@@ -16,7 +16,7 @@
     "test": "mocha-webpack \"spec/**/*.js\"",
     "test:cli": "mocha-webpack",
     "test:watch": "mocha-webpack --watch spec",
-    "postinstall": "./node_modules/.bin/bower install"
+    "postinstall": "./node_modules/.bin/bower install --allow-root"
   },
   "repository": {
     "type": "git",
