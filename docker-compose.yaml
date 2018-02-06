@@ -14,3 +14,11 @@ services:
       - "./:/app"
     ports:
       - "8080:8080"
+  component-no-reload:
+    restart: always
+    build: ./docker/component
+    volumes:
+      - "./:/app"
+    ports:
+      - "8080:8080"
+    command: bash -c "npm run rebuild-if-needed && npm run dev:noreload"
