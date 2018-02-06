@@ -7,7 +7,7 @@
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack -p",
     "dev": "webpack-dev-server --content-base dist --disable-host-check --public --host 0.0.0.0",
-    "dev:noreload": "http-server dist",
+    "dev:noreload": "webpack --watch & http-server dist",
     "debug": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js --verbose",
     "deploy:test": "cross-env-shell SLING_ENV=test \"npm run build:prod && static-component-deployer\"",
     "deploy:live": "cross-env-shell SLING_ENV=live \"npm run build:prod && static-component-deployer\"",
