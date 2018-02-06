@@ -47,10 +47,16 @@ You can make changes to the files in the `src/` directory and they should be aut
 ## Building and automated testing
 Building, testing and deploying scripts are all handled through NPM scripts.
 
-Whilst you're developing it's recommended you use the dev server with live-reloading. When using the dev server the generated output is stored in memory, so you won't see changes in the `dist/` directory. You can start the dev server by running the following.
+Whilst you're developing it's recommended you use the dev server with live-reloading. When using the dev server the generated output is stored in memory, so you won't see changes in the `dist/` directory. You can start the dev server by running the following:
 
 ```
-docker-compose up --build
+make dev
+```
+
+Note: If you are developing in an **older browser** (e.g. IE < 10) you will need to use an alternative command that forgoes the live-reloading behaviour:
+
+```
+make dev-no-reload
 ```
 
 The tests are found in the `spec/` directory. You should add new tests for your components there. You can run the tests by executing the following.
