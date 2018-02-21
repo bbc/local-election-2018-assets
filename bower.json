@@ -3,7 +3,7 @@
   "description": "Using bower components with (grandstand) with webpack",
   "main": "main.js",
   "authors": [
-    "BBC News Data Presentation Gangstas"
+    "BBC News Data Presentation"
   ],
   "license": "MIT",
   "homepage": "https://github.com/bbc/vanilla-static-component",
