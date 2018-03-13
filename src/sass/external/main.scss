@@ -1,5 +1,5 @@
 /* CSS pulled in via external stylesheet rather than inline (probably only party colour classes) */
-@import "../../../vendor/bower/gs-sass-tools/_sass-tools";
-@import '../../../politics/sass/colours';
+@import "../../../../vendor/bower/gs-sass-tools/_sass-tools";
+@import '../../../../politics/sass/colours';
 @import 'party-colours-mixins';
 @import 'party-colours';
