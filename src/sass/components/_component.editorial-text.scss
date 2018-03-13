@@ -1,0 +1,21 @@
+@if $core {
+    .nw-c-local-election-2017-editorial-text {
+        @include gel-typography('long-primer');
+
+        a {
+            color: $nw-c-link;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:visited {
+                color: $nw-c-visited;
+            }
+
+            &:hover,
+            &:focus {
+                color: $nw-c-hover-and-focus;
+                text-decoration: underline;
+            }
+        }
+    }
+}

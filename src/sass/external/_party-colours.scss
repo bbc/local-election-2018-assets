@@ -1,0 +1,11 @@
+.le2017-bg__party {
+    background-color: $party-other;
+    color: $nw-c-white;
+}
+
+@each $party-code, $party-color in $parties {
+    .le2017-bg__party--#{$party-code} {
+        @include party-background(#{$party-color});
+        color: set-party-text-color($party-color);
+    }
+}

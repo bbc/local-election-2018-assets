@@ -1,0 +1,51 @@
+// Map of all party codes and colours
+$party-other: $nw-c-dusty-gray;
+
+$parties: (
+    apni: #cdaf2d,
+    bnp:  #9094c8,
+    con:  #0575c9,
+    cpa:  #c39,
+    dup:  #c0153d,
+    ed:   #b20a06,
+    grn:  #28a500,
+    ichc: #ff0078,
+    ind:  #d26fbc,
+    lab:  #ed1e0e,
+    ld:   #e56600,
+    lib:  #c7941a,
+    mk:   #a09b1c,
+    nha:  #1554b6,
+    ni21: #009fbd,
+    noc:  #646464,
+    oth:  $party-other,
+    pc:   #028948,
+    pup:  #000b66,
+    pv:   #028948,
+    ra:   #00b0ac,
+    res:  #31b56a,
+    sdlp: #65a966,
+    sf:   #00623f,
+    slp:  #ff5b00,
+    snp:  #f7db15,
+    ssp:  #906,
+    tusc: #6c0000,
+    tuv:  #6dcad2,
+    ukip: #712f87,
+    uup:  #6ab1e6,
+    yf:   #00b8fd,
+    hung: #646464
+);
+
+@mixin party-background($color: $party-other) {
+    background-color: $color;
+}
+
+/* Threshold of 50% set by checking party colours using http://webaim.org/resources/contrastchecker (for Large Text) */
+@function set-party-text-color($color) {
+    @if (lightness($color) > 50) {
+        @return $nw-c-black;
+    } @else {
+        @return null;
+    }
+}

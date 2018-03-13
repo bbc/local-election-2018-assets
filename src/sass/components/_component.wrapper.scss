@@ -1,0 +1,9 @@
+@if $core {
+    .nw-c-local-election-2017-wrapper {
+        padding-top: 24px;
+
+        & + & {
+            padding-top: 0;
+        }
+    }
+}
