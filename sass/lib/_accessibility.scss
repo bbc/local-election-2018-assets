@@ -1,0 +1,13 @@
+// ========================
+// = Accessibility Mixins =
+// ========================
+
+@mixin hidden {
+    display: none;
+    visibility: hidden;
+}
+
+@mixin not-hidden-display-block {
+    display: block;
+    visibility: visible;
+}
