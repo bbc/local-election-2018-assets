@@ -2,6 +2,8 @@
   "name": "local-election-2018-assets",
   "version": "1.0.0",
   "homepage": "https://github.com/bbc/local-election-2018-assets",
-  "authors": [],
-  "description": ""
+  "authors": [
+    "BBC News Data Pres"
+  ],
+  "description": "Local Election 2018 shared assets"
 }
